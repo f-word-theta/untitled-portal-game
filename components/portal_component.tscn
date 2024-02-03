@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo281tvl0xf3p"]
+
+[ext_resource type="Script" path="res://components/portal_component.gd" id="1_lts6p"]
+
+[node name="PortalComponent" type="Node"]
+script = ExtResource("1_lts6p")
