@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyg348boebyg7"]
+[gd_scene load_steps=7 format=3 uid="uid://dyg348boebyg7"]
 
 [ext_resource type="Script" path="res://entities/test_portal.gd" id="1_fgear"]
 [ext_resource type="Texture2D" uid="uid://drg2kkkrnxtc0" path="res://assets/programmer_art/pixel.png" id="2_bw3gt"]
@@ -11,6 +11,9 @@ size = Vector2(2.5, 5)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2homg"]
 light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_axqr4"]
+blend_mode = 2
 
 [node name="BasePortal" type="Area2D"]
 collision_layer = 0
@@ -45,6 +48,15 @@ color = Color(0, 0, 0, 1)
 energy = 16.0
 texture = ExtResource("2_bw3gt")
 texture_scale = 50.0
+
+[node name="SpecialSpriteGroup" type="CanvasGroup" parent="."]
+clip_children = 1
+
+[node name="Mask" type="Sprite2D" parent="SpecialSpriteGroup"]
+material = SubResource("CanvasItemMaterial_axqr4")
+scale = Vector2(200, 200)
+texture = ExtResource("2_bw3gt")
+offset = Vector2(-0.5, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

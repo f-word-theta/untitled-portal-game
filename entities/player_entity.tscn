@@ -1,89 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://cilo3y536q3r5"]
+[gd_scene load_steps=6 format=3 uid="uid://cilo3y536q3r5"]
 
-[ext_resource type="Texture2D" uid="uid://bgmh5srgcfhuc" path="res://assets/programmer_art/Player Sword Idle 48x48.png" id="2_e53yg"]
+[ext_resource type="Texture2D" uid="uid://de2ir5ntsxab0" path="res://assets/programmer_art/sadadsadsadasdsadad.png" id="2_0fkfj"]
 [ext_resource type="PackedScene" uid="uid://cynxuyi3jtepf" path="res://components/velocity_component.tscn" id="3_0wosf"]
 [ext_resource type="Texture2D" uid="uid://drg2kkkrnxtc0" path="res://assets/programmer_art/pixel.png" id="3_cdve6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmevb"]
-size = Vector2(30, 30)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mr02j"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(0, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hdf2v"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(48, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ux0eb"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(96, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_73vty"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(144, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ryn2c"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(192, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gg6bd"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(240, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3mvdt"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(288, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_46qwh"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(336, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4j603"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(384, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_igk8f"]
-atlas = ExtResource("2_e53yg")
-region = Rect2(432, 0, 48, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nn5ix"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mr02j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hdf2v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ux0eb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_73vty")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ryn2c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gg6bd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3mvdt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_46qwh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4j603")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igk8f")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+size = Vector2(32, 32)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v3m0s"]
 blend_mode = 2
@@ -105,14 +27,10 @@ position_smoothing_speed = 9.0
 
 [node name="SpecialSpriteGroup" type="CanvasGroup" parent="."]
 clip_children = 1
-position = Vector2(0, -5)
 
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="SpecialSpriteGroup"]
+[node name="Sprite2D" type="Sprite2D" parent="SpecialSpriteGroup"]
 texture_filter = 5
-sprite_frames = SubResource("SpriteFrames_nn5ix")
-autoplay = "default"
-frame = 2
-frame_progress = 0.33315
+texture = ExtResource("2_0fkfj")
 
 [node name="Mask" type="Sprite2D" parent="SpecialSpriteGroup"]
 visible = false

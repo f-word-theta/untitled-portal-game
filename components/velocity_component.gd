@@ -8,7 +8,7 @@ const SPEED_MULTIPLIER: float = 100.0
 const TERMINAL_SPEED: float = 1000.0 / 6
 
 const GROUND_ACCELERATION_FACTOR: float = 10.0
-const AIR_ACCELERATION_FACTOR: float = 0.75
+const AIR_ACCELERATION_FACTOR: float = 0.9
 
 @onready var character_body: CharacterBody2D = get_parent()
 

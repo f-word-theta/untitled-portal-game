@@ -10,7 +10,7 @@ size = Vector2(1000, 20)
 [node name="Main" type="Node2D"]
 
 [node name="PlayerEntity" parent="." instance=ExtResource("1_5jv5i")]
-position = Vector2(347, 415)
+position = Vector2(377, 203)
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 z_index = -1
@@ -58,12 +58,13 @@ texture = ExtResource("2_fjo0d")
 metadata/_edit_lock_ = true
 
 [node name="CyanPortal" parent="." node_paths=PackedStringArray("destination_portal") instance=ExtResource("3_n3m07")]
-position = Vector2(315, 453)
+position = Vector2(245, 395)
+rotation = -1.5708
 destination_portal = NodePath("../PinkPortal")
 
 [node name="PinkPortal" parent="." node_paths=PackedStringArray("destination_portal") instance=ExtResource("3_n3m07")]
-position = Vector2(377, 453)
-rotation = 3.14159
+position = Vector2(377, 358)
+rotation = -1.5708
 scale = Vector2(1, 0.996416)
 destination_portal = NodePath("../CyanPortal")
 
@@ -75,10 +76,6 @@ position = Vector2(76, 480)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_r4tvo")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(7.809, 0.155)
-texture = ExtResource("2_fjo0d")
 
 [node name="DebugUI" type="CanvasLayer" parent="."]
 
