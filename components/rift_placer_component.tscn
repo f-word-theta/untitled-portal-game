@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kl48dwiaaw3"]
+
+[ext_resource type="Script" path="res://components/rift_placer_component.gd" id="1_t8xsu"]
+
+[node name="RiftPlacerComponent" type="Node"]
+script = ExtResource("1_t8xsu")

@@ -6,7 +6,6 @@ extends Node
 
 @export var area: Area2D
 @export var special_sprite_group: CanvasGroup
-@export var mask: Sprite2D
 
 @export var enabled: bool = true
 
@@ -62,18 +61,16 @@ func handle_rift_sprite_clipping(_delta: float) -> void:
 		for sprite_owner in projected_sprites:
 			if sprite_owner == traveller.name:
 				for projected_sprite in projected_sprites[sprite_owner]:
+					var rounded_rotation_degrees: float = round(destination_rift.global_rotation_degrees)
+					var rift_is_flipped: bool = (rounded_rotation_degrees >= -180.0 and rounded_rotation_degrees <= -90.0) or (rounded_rotation_degrees <= 180.0 and rounded_rotation_degrees >= 90.0)
 
 					for original_sprite in _special_sprite_group.get_children():
 						if original_sprite == mask_sprite:
 							continue
 						
 						if original_sprite.name == projected_sprite.name:
-							projected_sprite.rotation = original_sprite.rotation - area.rotation
-							last_relative_rotation = projected_sprite.rotation
-
-					# flip sprite when rotation is in a certain way
-					var rounded_rotation_degrees: float = round(destination_rift.global_rotation_degrees)
-					var rift_is_flipped: bool = (rounded_rotation_degrees >= -180.0 and rounded_rotation_degrees <= -90.0) or (rounded_rotation_degrees <= 180.0 and rounded_rotation_degrees >= 90.0)
+							#last_relative_rotation = projected_sprite.rotation
+							projected_sprite.global_rotation = original_sprite.global_rotation - area.global_rotation - deg_to_rad(180)
 
 					projected_sprite.flip_v = rift_is_flipped
 					projected_sprite.flip_h = rift_is_flipped
@@ -116,7 +113,12 @@ func _physics_process(delta: float) -> void:
 	handle_rift_teleportation(delta)
 
 func _on_rift_entered(traveller: Node2D) -> void:
+	traveller.set_collision_mask_value(ENVIRONMENT_COLLISION_MASK_VALUE, false)
+
 	if not (traveller.has_node("SpecialSpriteGroup") and traveller.get_node("SpecialSpriteGroup") is CanvasGroup):
+		return
+
+	if destination_rift == null:
 		return
 		
 	var _special_sprite_group: CanvasGroup = traveller.get_node("SpecialSpriteGroup")
@@ -129,10 +131,14 @@ func _on_rift_entered(traveller: Node2D) -> void:
 		duplicate_sprite(sprite, traveller)
 	
 	current_travellers.append(traveller)
-	traveller.set_collision_mask_value(ENVIRONMENT_COLLISION_MASK_VALUE, false)
 
 func _on_rift_exited(traveller: Node2D) -> void:
+	traveller.set_collision_mask_value(ENVIRONMENT_COLLISION_MASK_VALUE, true)
+	
 	if not (traveller.has_node("SpecialSpriteGroup") and traveller.get_node("SpecialSpriteGroup") is CanvasGroup):
+		return
+
+	if destination_rift == null:
 		return
 		
 	var _special_sprite_group: CanvasGroup = traveller.get_node("SpecialSpriteGroup")
@@ -143,9 +149,7 @@ func _on_rift_exited(traveller: Node2D) -> void:
 
 	for sprite_owner in projected_sprites:
 		if sprite_owner == traveller.name:
-			for sprite in projected_sprites[sprite_owner]:
-				sprite.queue_free()
+			for projected_sprite in projected_sprites[sprite_owner]:
+				projected_sprite.queue_free()
 
 	current_travellers.erase(traveller)
-
-	traveller.set_collision_mask_value(ENVIRONMENT_COLLISION_MASK_VALUE, true)

@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cilo3y536q3r5"]
+[gd_scene load_steps=7 format=3 uid="uid://cilo3y536q3r5"]
 
 [ext_resource type="Texture2D" uid="uid://de2ir5ntsxab0" path="res://assets/programmer_art/sadadsadsadasdsadad.png" id="2_0fkfj"]
+[ext_resource type="PackedScene" uid="uid://kl48dwiaaw3" path="res://components/rift_placer_component.tscn" id="2_583dw"]
 [ext_resource type="PackedScene" uid="uid://cynxuyi3jtepf" path="res://components/velocity_component.tscn" id="3_0wosf"]
 [ext_resource type="Texture2D" uid="uid://drg2kkkrnxtc0" path="res://assets/programmer_art/pixel.png" id="3_cdve6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmevb"]
 size = Vector2(32, 32)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v3m0s"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_axqr4"]
 blend_mode = 2
 
 [node name="PlayerEntity" type="CharacterBody2D"]
@@ -15,6 +16,10 @@ collision_layer = 3
 collision_mask = 5
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_0wosf")]
+
+[node name="RiftPlacerComponent" parent="." node_paths=PackedStringArray("camera", "rift_placement_direction") instance=ExtResource("2_583dw")]
+camera = NodePath("../PlayerCamera")
+rift_placement_direction = NodePath("../RiftPlacementDirection")
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_gmevb")
@@ -34,7 +39,10 @@ texture = ExtResource("2_0fkfj")
 
 [node name="Mask" type="Sprite2D" parent="SpecialSpriteGroup"]
 visible = false
-material = SubResource("CanvasItemMaterial_v3m0s")
-scale = Vector2(40, 40)
+material = SubResource("CanvasItemMaterial_axqr4")
+scale = Vector2(200, 200)
 texture = ExtResource("3_cdve6")
 offset = Vector2(-0.5, 0)
+
+[node name="RiftPlacementDirection" type="RayCast2D" parent="."]
+target_position = Vector2(500, 0)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp8ne34es2trx"]
+
+[ext_resource type="Texture2D" uid="uid://drg2kkkrnxtc0" path="res://assets/programmer_art/pixel.png" id="1_sj2s1"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_axqr4"]
+blend_mode = 2
+
+[node name="SpecialSpriteGroup" type="CanvasGroup"]
+clip_children = 1
+
+[node name="Mask" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_axqr4")
+scale = Vector2(200, 200)
+texture = ExtResource("1_sj2s1")
+offset = Vector2(-0.5, 0)
