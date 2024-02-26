@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bakea65ls7u2a"]
+
+[ext_resource type="Script" path="res://components/rift_component.gd" id="1_82371"]
+
+[node name="RiftComponent" type="Node"]
+script = ExtResource("1_82371")

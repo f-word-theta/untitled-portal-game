@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://rvqkkxn7y7eu"]
+[gd_scene load_steps=4 format=3 uid="uid://rvqkkxn7y7eu"]
 
 [ext_resource type="PackedScene" uid="uid://cilo3y536q3r5" path="res://entities/player_entity.tscn" id="1_5jv5i"]
-[ext_resource type="Texture2D" uid="uid://bf5h23ag84nve" path="res://icon.svg" id="2_fjo0d"]
-[ext_resource type="PackedScene" uid="uid://dyg348boebyg7" path="res://entities/base_portal.tscn" id="3_n3m07"]
+[ext_resource type="PackedScene" uid="uid://dyg348boebyg7" path="res://entities/base_rift.tscn" id="3_n3m07"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4tvo"]
 size = Vector2(1000, 20)
@@ -10,66 +9,22 @@ size = Vector2(1000, 20)
 [node name="Main" type="Node2D"]
 
 [node name="PlayerEntity" parent="." instance=ExtResource("1_5jv5i")]
-position = Vector2(377, 203)
+position = Vector2(245, 406)
 
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
-z_index = -1
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
-modulate = Color(1, 1, 1, 0.160784)
-position = Vector2(149, 244)
-texture = ExtResource("2_fjo0d")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup"]
-modulate = Color(1, 1, 1, 0.160784)
-position = Vector2(553, 388.5)
-scale = Vector2(0.609375, 0.476563)
-texture = ExtResource("2_fjo0d")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup"]
-modulate = Color(1, 1, 1, 0.160784)
-position = Vector2(209, 436.75)
-scale = Vector2(0.234375, 0.152344)
-texture = ExtResource("2_fjo0d")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup"]
-modulate = Color(1, 1, 1, 0.160784)
-position = Vector2(255, 301)
-scale = Vector2(0.523438, 0.951172)
-texture = ExtResource("2_fjo0d")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup"]
-modulate = Color(1, 1, 1, 0.160784)
-position = Vector2(483.25, 202.563)
-scale = Vector2(1.34766, 0.475586)
-texture = ExtResource("2_fjo0d")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup"]
-modulate = Color(1, 1, 1, 0.160784)
-position = Vector2(445, 437.719)
-scale = Vector2(1.34766, 0.97998)
-texture = ExtResource("2_fjo0d")
-metadata/_edit_lock_ = true
-
-[node name="CyanPortal" parent="." node_paths=PackedStringArray("destination_portal") instance=ExtResource("3_n3m07")]
-position = Vector2(245, 395)
+[node name="CyanPortal" parent="." instance=ExtResource("3_n3m07")]
+position = Vector2(245, 452.5)
 rotation = -1.5708
-destination_portal = NodePath("../PinkPortal")
 
-[node name="PinkPortal" parent="." node_paths=PackedStringArray("destination_portal") instance=ExtResource("3_n3m07")]
-position = Vector2(377, 358)
+[node name="RiftComponent" parent="CyanPortal" index="0" node_paths=PackedStringArray("destination_rift")]
+destination_rift = NodePath("../../PinkPortal")
+
+[node name="PinkPortal" parent="." instance=ExtResource("3_n3m07")]
+position = Vector2(377, 452.5)
 rotation = -1.5708
 scale = Vector2(1, 0.996416)
-destination_portal = NodePath("../CyanPortal")
 
-[node name="PortalCollisionShape" parent="PinkPortal" index="0"]
-debug_color = Color(1, 0.596078, 0.92549, 0.419608)
+[node name="RiftComponent" parent="PinkPortal" index="0" node_paths=PackedStringArray("destination_rift")]
+destination_rift = NodePath("../../CyanPortal")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(76, 480)
@@ -79,9 +34,5 @@ shape = SubResource("RectangleShape2D_r4tvo")
 
 [node name="DebugUI" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="DebugUI"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Angle"
-
+[editable path="CyanPortal"]
 [editable path="PinkPortal"]

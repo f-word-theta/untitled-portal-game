@@ -2,7 +2,7 @@ class_name VelocityComponent
 extends Node
 
 const GRAVITY_ENABLED: bool = true
-const GRAVITY: float = 120.0
+const GRAVITY: float = 120.0 / 5
 
 const SPEED_MULTIPLIER: float = 100.0
 const TERMINAL_SPEED: float = 1000.0 / 6
