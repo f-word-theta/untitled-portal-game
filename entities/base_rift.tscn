@@ -1,27 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyg348boebyg7"]
+[gd_scene load_steps=11 format=3 uid="uid://dyg348boebyg7"]
 
 [ext_resource type="Script" path="res://entities/base_rift.gd" id="1_en717"]
 [ext_resource type="PackedScene" uid="uid://bakea65ls7u2a" path="res://components/rift_component.tscn" id="2_fnorp"]
+[ext_resource type="Shader" path="res://shaders/ShaderTest.gdshader" id="3_8ne01"]
 [ext_resource type="PackedScene" uid="uid://bp8ne34es2trx" path="res://misc/special_sprite_group.tscn" id="3_v1ch0"]
+[ext_resource type="Texture2D" uid="uid://dhs0vk0n5b4" path="res://assets/programmer_art/New Project (29) (1).png" id="4_doqe2"]
+[ext_resource type="Texture2D" uid="uid://mxe7xgtb7pa4" path="res://assets/programmer_art/dsfsdsfsf.png" id="5_f5oy0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8uvpj"]
 size = Vector2(5, 35)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8t308"]
+shader = ExtResource("3_8ne01")
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/screen_size = null
+shader_parameter/force = -1.09
+shader_parameter/size = 8.045
+shader_parameter/thickness = 1.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmyp8"]
 size = Vector2(2.5, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s22lg"]
+size = Vector2(15, 20)
 
 [node name="BaseRift" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_en717")
 
-[node name="RiftComponent" parent="." node_paths=PackedStringArray("area", "special_sprite_group") instance=ExtResource("2_fnorp")]
+[node name="RiftComponent" parent="." node_paths=PackedStringArray("area", "funneling_area", "special_sprite_group") instance=ExtResource("2_fnorp")]
 area = NodePath("..")
+funneling_area = NodePath("../FunnelingArea")
 special_sprite_group = NodePath("../SpecialSpriteGroup")
 
 [node name="RiftCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8uvpj")
-debug_color = Color(0.572549, 0.847059, 0.996078, 0.145098)
+debug_color = Color(1, 1, 1, 0)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_8t308")
+position = Vector2(0.0280789, 1.62471)
+rotation = 0.07468
+scale = Vector2(24.78, 31.0768)
+texture = ExtResource("4_doqe2")
 
 [node name="RiftEdges" type="StaticBody2D" parent="."]
 collision_layer = 4
@@ -31,19 +55,39 @@ collision_mask = 2
 position = Vector2(0, -18.75)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_vmyp8")
+debug_color = Color(0, 0, 0, 0.117647)
 
 [node name="CollisionShapeBottom" type="CollisionShape2D" parent="RiftEdges"]
 position = Vector2(0, 18.75)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_vmyp8")
+debug_color = Color(0, 0, 0, 0.117647)
 
 [node name="SpecialSpriteGroup" parent="." instance=ExtResource("3_v1ch0")]
+
+[node name="FunnelingArea" type="Area2D" parent="."]
+position = Vector2(20, 0)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FunnelingArea"]
+position = Vector2(-5, 0)
+shape = SubResource("RectangleShape2D_s22lg")
+debug_color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="RiftDirection" type="RayCast2D" parent="."]
 enabled = false
 target_position = Vector2(20, 0)
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+z_index = -2
+scale = Vector2(0.045, 0.105)
+texture = ExtResource("5_f5oy0")
+
 [connection signal="body_entered" from="." to="RiftComponent" method="_on_rift_entered"]
 [connection signal="body_exited" from="." to="RiftComponent" method="_on_rift_exited"]
+[connection signal="body_entered" from="FunnelingArea" to="RiftComponent" method="_on_funneling_area_body_entered"]
+[connection signal="body_exited" from="FunnelingArea" to="RiftComponent" method="_on_funneling_area_body_exited"]
 
 [editable path="SpecialSpriteGroup"]

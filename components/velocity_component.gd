@@ -2,13 +2,13 @@ class_name VelocityComponent
 extends Node
 
 const GRAVITY_ENABLED: bool = true
-const GRAVITY: float = 120.0
+const GRAVITY: float = 120.0 * 1.5
 
 const SPEED_MULTIPLIER: float = 100.0
 const TERMINAL_SPEED: float = 1000.0 / 6
 
 const GROUND_ACCELERATION_FACTOR: float = 13.0
-const AIR_ACCELERATION_FACTOR: float = 0.9
+const AIR_ACCELERATION_FACTOR: float = 1.2
 
 @onready var character_body: CharacterBody2D = get_parent()
 
@@ -18,10 +18,12 @@ var velocity: Vector2 = Vector2():
 	set = _set_velocity, get = _get_velocity
 var input_vector: Vector2 = Vector2()
 
+func _ready():
+	await owner.ready
+
 func _physics_process(delta: float) -> void:
 	handle_input(delta)
 	handle_movement(delta)
-	
 
 func handle_input(_delta) -> void:
 	input_vector = Input.get_vector("left", "right", "up", "down")

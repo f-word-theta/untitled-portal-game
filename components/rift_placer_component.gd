@@ -6,5 +6,8 @@ extends Node
 @export var camera: Camera2D
 @export var rift_placement_direction: RayCast2D
 
+func _ready():
+	await owner.ready
+
 func _process(_delta):
-    rift_placement_direction.global_rotation = atan2(camera.get_local_mouse_position().y, camera.get_local_mouse_position().x)
+	rift_placement_direction.global_rotation = atan2(camera.get_local_mouse_position().y, camera.get_local_mouse_position().x)

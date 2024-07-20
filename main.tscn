@@ -9,24 +9,22 @@ size = Vector2(1000, 20)
 [node name="Main" type="Node2D"]
 
 [node name="PlayerEntity" parent="." instance=ExtResource("1_5jv5i")]
-position = Vector2(245, 406)
+position = Vector2(187, 427)
 
 [node name="CyanPortal" parent="." instance=ExtResource("3_n3m07")]
 position = Vector2(186, 452.5)
+rotation = -1.5708
 
 [node name="RiftComponent" parent="CyanPortal" index="0" node_paths=PackedStringArray("destination_rift")]
 destination_rift = NodePath("../../PinkPortal")
 
 [node name="PinkPortal" parent="." instance=ExtResource("3_n3m07")]
 position = Vector2(318, 452.5)
-rotation = -3.14159
+rotation = -1.5708
 scale = Vector2(1, 0.996416)
 
 [node name="RiftComponent" parent="PinkPortal" index="0" node_paths=PackedStringArray("destination_rift")]
 destination_rift = NodePath("../../CyanPortal")
-
-[node name="RiftCollisionShape" parent="PinkPortal" index="1"]
-debug_color = Color(0.996078, 0.847059, 0.996078, 0.145098)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(76, 480)
